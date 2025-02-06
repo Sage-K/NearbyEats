@@ -7,4 +7,4 @@ class VendorAdmin(admin.ModelAdmin):
     list_display_links = ('user', 'vendor_name')
 
 # Register your models here.
-admin.site.register(Vendor, VendorAdmin)
+admin.site.register(Vendor, VendorAdmin) 

@@ -1,0 +1,11 @@
+{% autoescape off %}
+
+Hello {{ user.first_name|default:"User" }},
+
+{% if is_approved %}
+Congratulations! Your restaurant has been approved
+{% else %}
+We are sorry! Your restaurant has been rejected
+{% endif %}
+
+{% endautoescape %}

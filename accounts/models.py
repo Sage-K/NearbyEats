@@ -102,6 +102,9 @@ class UserProfile(models.Model):
     modified_at = models.DateTimeField(auto_now_add=True)
     bio = models.TextField(blank=True, null=True)
 
+    def full_address(self):
+        return f'{self.address_line_1},{self.address_line2}'
+    
     def __str__(self):
         return self.user.email
     

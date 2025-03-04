@@ -10,6 +10,8 @@ from django.contrib import messages, auth
 from .utils import detectUser, send_verification_email
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
+from vendor.models import Vendor
+
 
 # Restrict the restaurant from accessing the customer page
 def check_role_restaurant(user):

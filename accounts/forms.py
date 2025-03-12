@@ -1,5 +1,7 @@
+from .validators import allow_only_images_validator
 from django import forms
-from .models import User
+from .models import User, UserProfile
+
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -19,3 +21,22 @@ class UserForm(forms.ModelForm):
                 "Password do not match!"
             )
         
+class UserProfileForm(forms.ModelForm):
+    address = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'start typing.......', 'required': 'required'}))
+    profile_picture = forms.FileField(widget=forms.FileInput(attrs={'class':'btn btn-info'}), validators=[allow_only_images_validator])
+    cover_photo = forms.FileField(widget=forms.FileInput(attrs={'class':'btn btn-info'}), validators=[allow_only_images_validator])
+    #latitude = forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'})),
+    #longitude =  forms.CharField(widget=forms.TextInput(attrs={'readonly': 'readonly'})),
+    class Meta:
+        model = UserProfile
+        fields = ['profile_picture','cover_photo','address','country','state' ,'city','pincode','latitude','longitude']
+
+    def __init__(self, *args, **kwargs):
+        super(UserProfileForm, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            if field == 'latitude' or field == 'longitude':
+                self.fields[field].widget.attrs['readonly'] = 'readonly'
+            
+
+
+    

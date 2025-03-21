@@ -22,10 +22,10 @@ class Category(models.Model):
     
 class FoodItem(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    food_title = models.CharField(max_length=50)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, blank=False, null=False)
+    food_title = models.CharField(max_length=50, blank=False, null=False)
     slug = models.SlugField(max_length=50, unique=True)
-    description = models.TextField(max_length=255, blank=True)
+    description = models.TextField(max_length=255, blank=False, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='foodimages')
     is_available = models.BooleanField(default=True)
